@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 20px;
+    background-color: #1558bc;
+
+    .name {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: large;
+      color: white;
+    }
+
+    .options {
+      display: flex;
+      gap: 12px;
+
+      .zoom {
+        display: flex;
+        gap: 4px;
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    app-page-view {
+      flex: 1;
+    }
+  }
+}

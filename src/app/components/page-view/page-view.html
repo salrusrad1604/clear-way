@@ -1,0 +1,14 @@
+<div #pageImgContainer class="container">
+  <img [src]="page?.imageUrl" />
+  @for (annotation of annotations; track $index) {
+  <app-annotation
+    #annotation
+    class="annotation"
+    [attr.data-target]="annotation.id"
+    [style]="{ top: `${annotation.y}%`, left: `${annotation.x}%`}"
+    [annotation]="annotation"
+    (onDeleteAnnotation)="deleteAnnotation(annotation)"
+  ></app-annotation>
+  }
+  <ng-template #dynamicComponent></ng-template>
+</div>

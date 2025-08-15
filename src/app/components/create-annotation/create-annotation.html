@@ -1,0 +1,5 @@
+<input #input type="text" pInputText [(ngModel)]="value" />
+@if (input.value) {
+<p-button icon="pi pi-check" size="small" [rounded]="true" [text]="true" severity="success" (onClick)="onSuccess.emit()" />
+}
+<p-button icon="pi pi-times" size="small" [rounded]="true" [text]="true" severity="danger" (onClick)="onClose.emit()" />

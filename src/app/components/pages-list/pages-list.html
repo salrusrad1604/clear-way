@@ -1,0 +1,3 @@
+@for (page of pages; track page.number) {
+<img [src]="page.imageUrl" [class]="{ selected: page.number === selectedPage()?.number }" (click)="setSelectPage(page)" />
+}

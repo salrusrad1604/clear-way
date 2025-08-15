@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  align-items: center;
+  background-color: rgb(22, 174, 22);
+  border: 1px solid green;
+  border-radius: 4px;
+  opacity: 0.5;
+  user-select: none;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .text {
+    color: white;
+    margin: 0;
+    text-wrap: nowrap;
+  }
+}

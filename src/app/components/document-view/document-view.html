@@ -1,0 +1,20 @@
+<div class="header">
+  <div class="name">{{ header() }}</div>
+  <div class="options">
+    <div class="zoom">
+      <p-button icon="pi pi-minus" size="small" severity="warn" variant="text" (onClick)="zoom('minus')" />
+      <p-button icon="pi pi-plus" size="small" severity="warn" variant="text" (onClick)="zoom('plus')" />
+    </div>
+    <p-button label="Save" size="small" />
+  </div>
+</div>
+
+<div class="main">
+  <app-page-view
+    [page]="selectedPage()"
+    [annotations]="selectAnnotations()"
+    (onDeleteAnnotion)="deleteAnnotation($event)"
+    (onCreateAnnotion)="createAnnotation($event)"
+  ></app-page-view>
+  <app-pages-list [pages]="pages()"></app-pages-list>
+</div>
