@@ -78,13 +78,17 @@ export class DocumentView {
       });
   }
 
-  zoom(type: 'plus' | 'minus'): void {
+  zoom(type: 'plus' | 'minus' | 'init'): void {
     const page = document.querySelector('app-page-view')?.querySelector('.container');
     const height = page?.clientHeight || 0;
 
     if (page) {
-      const scale = 1.1;
-      (page as HTMLElement).style.height = (type === 'plus' ? scale * height : height / scale) + 'px';
+      if (type === 'init') {
+        (page as HTMLElement).style.height = '100%';
+      } else {
+        const scale = 1.2;
+        (page as HTMLElement).style.height = (type === 'plus' ? scale * height : height / scale) + 'px';
+      }
     }
   }
 

@@ -2,6 +2,7 @@
   <div class="name">{{ header() }}</div>
   <div class="options">
     <div class="zoom">
+      <p-button icon="pi pi-arrows-alt" size="small" severity="warn" variant="text" (onClick)="zoom('init')" />
       <p-button icon="pi pi-minus" size="small" severity="warn" variant="text" (onClick)="zoom('minus')" />
       <p-button icon="pi pi-plus" size="small" severity="warn" variant="text" (onClick)="zoom('plus')" />
     </div>
