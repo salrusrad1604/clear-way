@@ -35,9 +35,10 @@ export class DocumentView {
   header = computed(() => this.document()?.name || '');
   pages = computed(() => this.document()?.pages || []);
 
+  readonly maxScale = 10;
   scale = signal(0);
-  isZoomPlus = computed(() => this.scale() >= 5);
-  isZoomMinus = computed(() => this.scale() <= -5);
+  isZoomPlus = computed(() => this.scale() >= this.maxScale);
+  isZoomMinus = computed(() => this.scale() <= -this.maxScale);
 
   @ViewChild('zoomContainer') zoomContainer!: ElementRef;
   @ViewChild('dynamicComponent', { read: ViewContainerRef }) viewRef!: ViewContainerRef;
