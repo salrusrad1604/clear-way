@@ -13,10 +13,9 @@
 <div class="main">
   <div #zoomContainer class="container">
     @for (page of pages(); track page.number) {
-    <img [src]="page?.imageUrl" />
+    <img [src]="page.imageUrl" />
     } @for (annotation of annotations(); track $index) {
     <app-annotation
-      #annotation
       class="annotation"
       [attr.data-target]="annotation.id"
       [style]="{ top: `${annotation.y}%`, left: `${annotation.x}%`}"
