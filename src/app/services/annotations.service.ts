@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Annotation, Annotations } from '../model/annotation-model';
+import { Annotation } from '../model/annotation-model';
 
 const STORAGE_KEY = 'CLEAR_ANNOTATIONS';
 
@@ -8,38 +8,52 @@ const STORAGE_KEY = 'CLEAR_ANNOTATIONS';
   providedIn: 'root',
 })
 export class AnnotationsService {
-  getAnnotationById(id: string | null): Observable<Annotations> {
-    if (!localStorage.getItem(STORAGE_KEY)) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({}));
+  getAnnotationById(id: string | null): Observable<Annotation[]> {
+    const key = STORAGE_KEY + id;
+    if (!localStorage.getItem(key)) {
+      localStorage.setItem(key, JSON.stringify([]));
     }
-    return of(JSON.parse(localStorage.getItem(STORAGE_KEY) as string));
+    return of(JSON.parse(localStorage.getItem(key) as string));
   }
 
-  deleteAnnotation(page: number, annotation: Annotation): void {
-    const annotations = JSON.parse(localStorage.getItem(STORAGE_KEY) as string);
-    annotations[page] = annotations[page].filter((item: Annotation) => item.id != annotation.id);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(annotations));
+  deleteAnnotation(id: string | null, annotation: Annotation): void {
+    const key = STORAGE_KEY + id;
+
+    const annotations = JSON.parse(localStorage.getItem(key) as string).filter((item: Annotation) => item.id != annotation.id);
+
+    localStorage.setItem(key, JSON.stringify(annotations));
   }
 
-  createAnnotation(page: number, annotation: Annotation): void {
-    const annotations = JSON.parse(localStorage.getItem(STORAGE_KEY) as string);
-    if (annotations[page]) {
-      annotations[page].push(annotation);
-    } else {
-      annotations[page] = [annotation];
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(annotations));
+  createAnnotation(id: string | null, annotation: Annotation): void {
+    if (!annotation.text) return;
+
+    const key = STORAGE_KEY + id;
+
+    const annotations = JSON.parse(localStorage.getItem(key) as string);
+    annotations.push(annotation);
+
+    localStorage.setItem(key, JSON.stringify(annotations));
   }
 
-  updateAnnotationPossition(page: number, annotation: Annotation): void {
-    const annotations = JSON.parse(localStorage.getItem(STORAGE_KEY) as string);
-    annotations[page].forEach((item: Annotation) => {
+  updateAnnotationPossition(id: string | null, annotation: Annotation): void {
+    const key = STORAGE_KEY + id;
+
+    const annotations = JSON.parse(localStorage.getItem(key) as string);
+    annotations.forEach((item: Annotation) => {
       if (item.id === annotation.id) {
         item.x = annotation.x;
         item.y = annotation.y;
       }
     });
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(annotations));
+    localStorage.setItem(key, JSON.stringify(annotations));
+  }
+
+  saveAnnotations(id: string | null): void {
+    const key = STORAGE_KEY + id;
+    const annotations = JSON.parse(localStorage.getItem(key) as string).map(({ text }: Annotation) => text);
+    const text = annotations.length ? `добавлены аннотации ${annotations.join(', ')}` : 'нет аннотаций';
+
+    console.info(`В документ с ID = ${id} ${text}`);
   }
 }

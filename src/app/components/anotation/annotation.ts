@@ -12,16 +12,6 @@ export class Anotation {
   @Input() annotation!: Annotation;
   @Output() onDeleteAnnotation: EventEmitter<null> = new EventEmitter();
 
-  deleteView: WritableSignal<boolean> = signal(false);
-
-  @HostListener('mouseenter') deleteViewOn() {
-    this.deleteView.set(true);
-  }
-
-  @HostListener('mouseleave') deleteViewOff() {
-    this.deleteView.set(false);
-  }
-
   deleteAnnotation(e: Event): void {
     e.preventDefault();
     this.onDeleteAnnotation.emit();

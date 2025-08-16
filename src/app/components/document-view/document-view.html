@@ -6,16 +6,25 @@
       <p-button icon="pi pi-minus" size="small" severity="warn" variant="text" (onClick)="zoom('minus')" />
       <p-button icon="pi pi-plus" size="small" severity="warn" variant="text" (onClick)="zoom('plus')" />
     </div>
-    <p-button label="Save" size="small" />
+    <p-button label="Save" size="small" (onClick)="save()" />
   </div>
 </div>
 
 <div class="main">
-  <app-page-view
-    [page]="selectedPage()"
-    [annotations]="selectAnnotations()"
-    (onDeleteAnnotion)="deleteAnnotation($event)"
-    (onCreateAnnotion)="createAnnotation($event)"
-  ></app-page-view>
-  <app-pages-list [pages]="pages()"></app-pages-list>
+  <div #zoomContainer class="container">
+    @for (page of pages(); track page.number) {
+    <img [src]="page?.imageUrl" />
+    } 
+    @for (annotation of annotations(); track $index) {
+    <app-annotation
+      #annotation
+      class="annotation"
+      [attr.data-target]="annotation.id"
+      [style]="{ top: `${annotation.y}%`, left: `${annotation.x}%`}"
+      [annotation]="annotation"
+      (onDeleteAnnotation)="deleteAnnotation(annotation)"
+    ></app-annotation>
+    }
+    <ng-template #dynamicComponent></ng-template>
+  </div>
 </div>

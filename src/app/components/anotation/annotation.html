@@ -1,4 +1,2 @@
 <p class="text">{{ annotation.text }}</p>
-@if (deleteView()) {
 <p-button icon="pi pi-trash" size="small" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteAnnotation($event)" />
-}
