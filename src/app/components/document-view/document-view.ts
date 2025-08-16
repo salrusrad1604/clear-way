@@ -35,6 +35,10 @@ export class DocumentView {
   header = computed(() => this.document()?.name || '');
   pages = computed(() => this.document()?.pages || []);
 
+  scale = signal(0);
+  isZoomPlus = computed(() => this.scale() >= 5);
+  isZoomMinus = computed(() => this.scale() <= -5);
+
   @ViewChild('zoomContainer') zoomContainer!: ElementRef;
   @ViewChild('dynamicComponent', { read: ViewContainerRef }) viewRef!: ViewContainerRef;
 
@@ -93,13 +97,15 @@ export class DocumentView {
     switch (type) {
       case 'init':
         this.zoomContainer.nativeElement.style.width = '100%';
+        this.scale.set(0);
         break;
       case 'plus':
         this.zoomContainer.nativeElement.style.width = this.zoomContainer.nativeElement.offsetWidth * scale + 'px';
+        this.scale.update(v => v + 1);
         break;
       case 'minus':
         this.zoomContainer.nativeElement.style.width = this.zoomContainer.nativeElement.offsetWidth / scale + 'px';
-
+        this.scale.update(v => v - 1);
         break;
     }
   }
