@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ccc;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 20px;
+    background-color: #1558bc;
+
+    .name {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: large;
+      color: white;
+    }
+
+    .options {
+      display: flex;
+      gap: 12px;
+
+      .zoom {
+        display: flex;
+        gap: 4px;
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    flex: 1;
+    overflow: auto;
+    position: relative;
+
+    .container {
+      width: 100%;
+      position: relative;
+      margin: 0 auto;
+      transition: width 0.25s ease-out;
+
+      img {
+        width: 100%;
+        user-select: none;
+      }
+
+      .annotation {
+        position: absolute;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div class="header">
+  <div class="name">{{ header() }}</div>
+  <div class="options">
+    <div class="zoom">
+      <p-button icon="pi pi-arrows-alt" size="small" severity="warn" variant="text" (onClick)="zoom('init')" />
+      <p-button icon="pi pi-minus" size="small" severity="warn" variant="text" [disabled]="isZoomMinus()" (onClick)="zoom('minus')" />
+      <p-button icon="pi pi-plus" size="small" severity="warn" variant="text" [disabled]="isZoomPlus()" (onClick)="zoom('plus')" />
+    </div>
+    <p-button label="Save" size="small" (onClick)="save()" />
+  </div>
+</div>
+
+<div class="main">
+  <div #zoomContainer class="container">
+    @for (page of pages(); track page.number) {
+    <img [src]="page?.imageUrl" />
+    } @for (annotation of annotations(); track $index) {
+    <app-annotation
+      #annotation
+      class="annotation"
+      [attr.data-target]="annotation.id"
+      [style]="{ top: `${annotation.y}%`, left: `${annotation.x}%`}"
+      [annotation]="annotation"
+      (onDeleteAnnotation)="deleteAnnotation(annotation)"
+    ></app-annotation>
+    }
+    <ng-template #dynamicComponent></ng-template>
+  </div>
+</div>
