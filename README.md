@@ -1,59 +1,35 @@
 # ClearWay
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+● Задание должно быть выполнено на фреймворке Angular без использования дополнительных сторонних библиотек, за исключением ui китов вроде Taiga, Angular Material и тп. Стейт менеджер не требуется.
+- В качестве ui-kit использовал PrimeNG
 
-## Development server
+● Пользователь открывает документ по ссылке, в которой есть id документа. Список документов не требуется, будем считать, что пользователь получил прямую ссылку на документ.
+- Реализовал роут с ссылкой, дальше ссылка считывается и в теории запрашивается док по id. В данном случае по id реализовано хранение аннотаций в localStorage 
 
-To start a local development server, run:
+● Приложение получает информацию о документе по API, в которой указаны страницы со ссылками на изображения (смотрите приложенный json, его используйте как мокап). Изображения - это страницы документа, пользователь имеет возможность скроллить документ вниз для просмотра всех страниц.
+- Реализован просмотр документа
 
-```bash
-ng serve
-```
+● Документ может быть увеличен или уменьшен (zoom) кнопками “+” и “-”.
+- Добавлены кнопки зума, и еще кнопка возврата в начальное состояние.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+● Пользователь может добавлять аннотации в виде текста.
+- Правым щелчком мыши добавляется поле для ввода аннотации.
 
-## Code scaffolding
+● Добавленные аннотации можно перемещать. Перемещение должно быть реализовано самостоятельно без использования библиотек.
+- Реализовано перемещение аннотаций по документу
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+● Можно также удалять аннотации.
+- Справа от аннотации есть кнопка удаления.
 
-```bash
-ng generate component component-name
-```
+● Должна быть кнопка “Сохранить”, при нажатии на которую в консоль выводится информация о документе с добавленными аннотациями.
+- Добавил кнопку при нажатии выводится текст.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+● Дизайн произвольный, не учитывается при рассмотрении работы, хотя плавность интерфейса будет плюсом
+- Добавил стандартные css анимации
 
-```bash
-ng generate --help
-```
+____________________________________________________________________________________________________________________________________________
 
-## Building
++ Достаточно плавное перемещение
++ Интуитивное создание аннотаций
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Возможно было бы хорошо использовать ленивую загрузку, для больших документов может быть критично
